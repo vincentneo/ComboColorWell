@@ -25,6 +25,7 @@ public class ComboColorWell: NSControl {
         }
         set {
             comboColorWellCell.color = newValue
+            NotificationCenter.default.post(name: .colorDidChange, object: nil)
         }
     }
     
@@ -74,6 +75,11 @@ public class ComboColorWell: NSControl {
     }
     
 }
+
+public extension Notification.Name {
+    static let colorDidChange = Notification.Name("ComboColorWell_ColorDidChange")
+}
+
 
 extension ComboColorWell: NSColorChanging {
     public func changeColor(_ sender: NSColorPanel?) {
