@@ -25,7 +25,6 @@ public class ComboColorWell: NSControl {
         }
         set {
             comboColorWellCell.color = newValue
-            NotificationCenter.default.post(name: .colorDidChange, object: nil)
         }
     }
     
@@ -119,6 +118,7 @@ class ComboColorWellCell: NSActionCell {
     var color = NSColor.black {
         didSet {
             controlView?.needsDisplay = true
+            NotificationCenter.default.post(name: .colorDidChange, object: nil)
         }
     }
     /**
