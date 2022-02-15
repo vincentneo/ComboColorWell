@@ -249,9 +249,11 @@ class ComboColorWellCell: NSActionCell {
         if #available(macOS 10.14, *) {
             let accentColor = NSColor.controlAccentColor.usingColorSpace(.sRGB)!
             let lighterColor = NSColor(hue: accentColor.hueComponent,
-                                       saturation: accentColor.saturationComponent - 0.3,
-                                       brightness: 1, alpha: 1)
-            let darkerColor = accentColor
+                                       saturation: accentColor.saturationComponent + 0.2,
+                                       brightness: accentColor.brightnessComponent + 0.15, alpha: 1)
+            let darkerColor = NSColor(hue: accentColor.hueComponent,
+                                      saturation: accentColor.saturationComponent + 0.1,
+                                      brightness: accentColor.brightnessComponent - 0.2, alpha: 1)
             buttonGradient = NSGradient(starting: darkerColor, ending: lighterColor)!
         }
         else {
@@ -259,7 +261,7 @@ class ComboColorWellCell: NSActionCell {
                                         ending: NSColor(red: 95, green: 165, blue: 255))!
         }
         
-        NSColor.black.withAlphaComponent(0.25).setStroke()
+        NSColor.white.withAlphaComponent(0.25).setStroke()
 
         // give some space to the control rect for anti aliasing
         let smoothRect = NSInsetRect(cellFrame, 0.5, 0.5)
