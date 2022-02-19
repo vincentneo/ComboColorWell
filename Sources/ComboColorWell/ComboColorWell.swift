@@ -71,6 +71,12 @@ public class ComboColorWell: NSControl {
     
     private func doInit() {
         cell = ComboColorWellCell()
+        self.wantsLayer = true
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 0, height: -0.5)
+        shadow.shadowColor = .black.withAlphaComponent(0.3)
+        shadow.shadowBlurRadius = 1
+        self.shadow = shadow
     }
     
 }
@@ -331,12 +337,26 @@ class ComboColorWellCell: NSActionCell {
         
         fill(path: path, withColor: color)
         
-        
         // reset the clipping area
         path.setClip()
+        
+        // draw a seperator
+        let separatorPath = NSBezierPath()
+        let area = colorArea(withFrame: cellFrame)
+        
+        var point = NSPoint(x: area.width, y: area.origin.y)
+        separatorPath.move(to: point)
+        point = NSPoint(x: area.width, y: area.height)
+        separatorPath.line(to: point)
+        
+        NSColor.gray.withAlphaComponent(0.2).setStroke()
+        separatorPath.stroke()
+        
+        NSColor.white.withAlphaComponent(0.25).setStroke()
+
         // draw the control border
         path.stroke()
-
+        
         if !isEnabled {
             fill(path: path, withColor: NSColor(calibratedWhite: 1.0, alpha: 0.25))
         }
