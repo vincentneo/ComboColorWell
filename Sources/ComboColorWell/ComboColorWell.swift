@@ -81,11 +81,6 @@ public class ComboColorWell: NSControl {
     
 }
 
-public extension Notification.Name {
-    static let colorDidChange = Notification.Name("ComboColorWell_ColorDidChange")
-}
-
-
 extension ComboColorWell: NSColorChanging {
     public func changeColor(_ sender: NSColorPanel?) {
         if let sender = sender {
@@ -124,7 +119,6 @@ class ComboColorWellCell: NSActionCell {
     var color = NSColor.black {
         didSet {
             controlView?.needsDisplay = true
-            NotificationCenter.default.post(name: .colorDidChange, object: nil)
         }
     }
     /**
