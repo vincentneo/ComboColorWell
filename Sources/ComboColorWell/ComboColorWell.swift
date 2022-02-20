@@ -217,6 +217,8 @@ class ComboColorWellCell: NSActionCell {
         didSet {
             // handle the new state
             handleStateChange()
+            let userInfo = ["state" : state]
+            NotificationCenter.default.post(name: ComboColorWell.stateDidChangeNotification, object: nil, userInfo: userInfo)
         }
     }
     
@@ -515,8 +517,6 @@ class ComboColorWellCell: NSActionCell {
         default:
             break
         }
-        let userInfo = ["state" : state]
-        NotificationCenter.default.post(name: ComboColorWell.stateDidChangeNotification, object: nil, userInfo: userInfo)
     }
     
     /**
