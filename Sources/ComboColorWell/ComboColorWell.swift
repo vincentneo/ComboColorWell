@@ -14,6 +14,8 @@ import Cocoa
  */
 public class ComboColorWell: NSControl {
     
+    public static var stateDidChangeNotification = NSNotification.Name("ComboColorWellStateDidChange")
+    
     // MARK: - public vars
     
     /**
@@ -513,6 +515,8 @@ class ComboColorWellCell: NSActionCell {
         default:
             break
         }
+        let userInfo = ["state" : state]
+        NotificationCenter.default.post(name: ComboColorWell.stateDidChangeNotification, object: nil, userInfo: userInfo)
     }
     
     /**
